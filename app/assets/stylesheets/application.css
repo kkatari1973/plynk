@@ -1,0 +1,244 @@
+
+/* General page styling */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #f7f7f5;
+  color: #252525;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 15px;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #a45b35;
+}
+
+/* Main layout */
+
+.app-layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+.sidebar {
+  width: 245px;
+  background: #ffffff;
+  border-right: 1px solid #e8e8e5;
+  padding: 32px 24px;
+  flex-shrink: 0;
+}
+
+.main-content {
+  flex: 1;
+  max-width: 1100px;
+  padding: 40px 55px;
+}
+
+/* Logo */
+
+.logo {
+  font-size: 27px;
+  font-weight: 800;
+  letter-spacing: -1.5px;
+  margin-bottom: 8px;
+}
+
+.logo span {
+  color: #b76d43;
+}
+
+.tagline {
+  color: #888;
+  font-size: 12px;
+  margin-bottom: 40px;
+}
+
+/* Sidebar navigation */
+
+.nav-section {
+  margin-bottom: 32px;
+}
+
+.nav-heading {
+  color: #999;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 14px;
+}
+
+.nav-link {
+  display: block;
+  padding: 10px 12px;
+  border-radius: 8px;
+  margin-bottom: 4px;
+  color: #555;
+}
+
+.nav-link:hover {
+  background: #f5f0eb;
+  color: #a45b35;
+}
+
+/* Page header */
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.page-header h1 {
+  font-size: 30px;
+  letter-spacing: -1px;
+  margin: 0;
+}
+
+.page-subtitle {
+  color: #888;
+  margin-top: 8px;
+}
+
+/* Buttons */
+
+.button {
+  display: inline-block;
+  background: #a45b35;
+  color: white;
+  padding: 11px 18px;
+  border-radius: 8px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+}
+
+.button:hover {
+  background: #864727;
+  color: white;
+}
+
+/* Search */
+
+.search-form {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 28px;
+}
+
+.search-form input {
+  flex: 1;
+  padding: 12px 15px;
+  border: 1px solid #e2e2df;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+/* Category filters */
+
+.category-filters {
+  display: flex;
+  gap: 9px;
+  flex-wrap: wrap;
+  margin-bottom: 30px;
+}
+
+.category-chip {
+  display: inline-block;
+  padding: 8px 15px;
+  background: white;
+  border: 1px solid #e5e5e2;
+  border-radius: 20px;
+  color: #666;
+  font-size: 13px;
+}
+
+.category-chip:hover,
+.category-chip.active {
+  background: #f1e4da;
+  color: #8f4e2e;
+  border-color: #e5cbb9;
+}
+
+/* Review cards */
+
+.review-card {
+  background: white;
+  border: 1px solid #e9e9e6;
+  border-radius: 12px;
+  padding: 23px;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+}
+
+.review-card h3 {
+  margin: 7px 0;
+  font-size: 19px;
+}
+
+.review-meta {
+  color: #888;
+  font-size: 13px;
+}
+
+.review-body {
+  color: #555;
+  line-height: 1.6;
+  margin-top: 12px;
+}
+
+.review-rating {
+  color: #d18b35;
+  letter-spacing: 2px;
+  margin-top: 8px;
+}
+
+/* Forms */
+
+input,
+textarea,
+select {
+  font-family: inherit;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: 2px solid #d8ad92;
+  border-color: #a45b35;
+}
+
+/* Responsive layout */
+
+@media (max-width: 800px) {
+  .app-layout {
+    display: block;
+  }
+
+  .sidebar {
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid #e8e8e5;
+    padding: 18px 22px;
+  }
+
+  .main-content {
+    padding: 25px 20px;
+  }
+
+  .page-header {
+    align-items: flex-start;
+    gap: 15px;
+    flex-wrap: wrap;
+  }
+}

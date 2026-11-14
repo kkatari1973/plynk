@@ -1,0 +1,88 @@
+
+<div class="app-layout">
+
+  <aside class="sidebar">
+    <div class="logo">recs<span>.</span></div>
+    <div class="tagline">Good things are worth sharing.</div>
+
+    <div class="nav-section">
+      <div class="nav-heading">Discover</div>
+      <%= link_to "Home", root_path, class: "nav-link" %>
+      <%= link_to "Categories", categories_path, class: "nav-link" %>
+      <%= link_to "Friends", friendships_path, class: "nav-link" %>
+    </div>
+
+    <div class="nav-section">
+      <div class="nav-heading">Your account</div>
+      <%= link_to "Profile", "#", class: "nav-link" %>
+    </div>
+  </aside>
+
+  <main class="main-content">
+
+    <div class="page-header">
+      <div>
+        <h1>Your recommendations</h1>
+        <div class="page-subtitle">
+          Discover what your friends are enjoying.
+        </div>
+      </div>
+
+      <%= link_to "＋ Add recommendation",
+          items_path,
+          class: "button" %>
+    </div>
+
+    <%= form_with url: root_path, method: :get,
+        class: "search-form" do |form| %>
+      <%= form.text_field :q,
+          value: @query,
+          placeholder: "Search recommendations..." %>
+      <%= form.submit "Search", class: "button" %>
+    <% end %>
+
+    <div class="category-filters">
+      <%= link_to "All",
+          root_path,
+          class: "category-chip #{'active' if params[:category].blank?}" %>
+
+      <% @categories.each do |category| %>
+        <%= link_to category.name,
+            root_path(category: category.slug),
+            class: "category-chip #{'active' if params[:category] == category.slug}" %>
+      <% end %>
+    </div>
+
+    <div class="review-feed">
+      <% @reviews.each do |review| %>
+        <article class="review-card">
+          <div class="review-meta">
+            <%= review.user.name %> recommended
+            <%= review.item.category.name.downcase %>
+          </div>
+
+          <h3><%= review.item.title %></h3>
+
+          <% if review.item.creator.present? %>
+            <div class="review-meta">
+              <%= review.item.creator %>
+            </div>
+          <% end %>
+
+          <div class="review-rating">
+            <%= "★" * review.rating %><%= "☆" * (5 - review.rating) %>
+          </div>
+
+          <div class="review-body">
+            <%= review.body %>
+          </div>
+        </article>
+      <% end %>
+
+      <% if @reviews.empty? %>
+        <p>No recommendations yet. Be the first to share one!</p>
+      <% end %>
+    </div>
+
+  </main>
+</div>

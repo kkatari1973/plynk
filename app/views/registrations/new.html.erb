@@ -1,0 +1,42 @@
+<div class="auth-container">
+  <h1>Create your account</h1>
+  <p>Join your friends and share recommendations.</p>
+
+  <%= form_with model: @user, url: registration_path do |form| %>
+
+    <% if @user.errors.any? %>
+      <div class="error-messages">
+        <% @user.errors.full_messages.each do |message| %>
+          <p><%= message %></p>
+        <% end %>
+      </div>
+    <% end %>
+
+    <div>
+      <%= form.label :name, "Your name" %>
+      <%= form.text_field :name, required: true %>
+    </div>
+
+    <div>
+      <%= form.label :email_address, "Email" %>
+      <%= form.email_field :email_address, required: true %>
+    </div>
+
+    <div>
+      <%= form.label :password %>
+      <%= form.password_field :password, required: true %>
+    </div>
+
+    <div>
+      <%= form.label :password_confirmation, "Confirm password" %>
+      <%= form.password_field :password_confirmation, required: true %>
+    </div>
+
+    <%= form.submit "Create account" %>
+  <% end %>
+
+  <p>
+    Already have an account?
+    <%= link_to "Sign in", new_session_path %>
+  </p>
+</div>

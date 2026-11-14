@@ -1,0 +1,116 @@
+
+<div class="friends-page">
+
+  <header class="page-header">
+    <h1>My Friends</h1>
+    <p>Connect with people whose recommendations you trust.</p>
+  </header>
+
+  <% if flash[:notice].present? %>
+    <div class="notice"><%= flash[:notice] %></div>
+  <% end %>
+
+  <% if flash[:alert].present? %>
+    <div class="alert"><%= flash[:alert] %></div>
+  <% end %>
+
+  <section class="friend-section">
+    <h2>Add a friend</h2>
+
+    <%= form_with url: friendships_path, method: :post do |form| %>
+      <div class="friend-form">
+        <%= form.email_field :email_address,
+              placeholder: "Enter your friend's email",
+              required: true %>
+
+        <%= form.submit "Send request" %>
+      </div>
+    <% end %>
+  </section>
+
+  <section class="friend-section">
+    <h2>Friend requests received</h2>
+
+    <% if @received_requests.any? %>
+      <% @received_requests.each do |request| %>
+        <div class="friend-row">
+          <div>
+            <strong>
+              <%= request.user.name.presence || request.user.email_address %>
+            </strong>
+            <p>Wants to connect with you</p>
+          </div>
+
+          <div class="friend-actions">
+            <%= button_to "Accept",
+                  friendship_path(request),
+                  method: :patch,
+                  params: { status: "accepted" } %>
+
+            <%= button_to "Decline",
+                  friendship_path(request),
+                  method: :patch,
+                  params: { status: "declined" } %>
+          </div>
+        </div>
+      <% end %>
+    <% else %>
+      <p class="empty-message">No pending requests.</p>
+    <% end %>
+  </section>
+
+  <section class="friend-section">
+    <h2>Requests sent</h2>
+
+    <% if @sent_requests.any? %>
+      <% @sent_requests.each do |request| %>
+        <div class="friend-row">
+          <div>
+            <strong>
+              <%= request.friend.name.presence || request.friend.email_address %>
+            </strong>
+            <p>Waiting for acceptance</p>
+          </div>
+        </div>
+      <% end %>
+    <% else %>
+      <p class="empty-message">You haven't sent any requests.</p>
+    <% end %>
+  </section>
+
+  <section class="friend-section">
+    <h2>My friends</h2>
+
+    <% if @friends.any? %>
+      <% @friends.each do |friend| %>
+        <div class="friend-row">
+          <div>
+            <strong>
+              <%= friend.name.presence || friend.email_address %>
+            </strong>
+            <p>Connected</p>
+          </div>
+
+          <% friendship = Friendship.find_by(
+               user: Current.user, friend: friend, status: "accepted"
+             ) ||
+             Friendship.find_by(
+               user: friend, friend: Current.user, status: "accepted"
+             ) %>
+
+          <% if friendship %>
+            <%= button_to "Remove friend",
+                  friendship_path(friendship),
+                  method: :delete,
+                  data: { turbo_confirm: "Remove this friend?" } %>
+          <% end %>
+        </div>
+      <% end %>
+    <% else %>
+      <p class="empty-message">
+        You haven't connected with anyone yet.
+      </p>
+    <% end %>
+  </section>
+
+</div>
