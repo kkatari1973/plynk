@@ -1,2 +1,124 @@
-<h1>Reviews#new</h1>
-<p>Find me in app/views/reviews/new.html.erb</p>
+
+<div class="app-layout">
+
+  <aside class="sidebar">
+    <div class="logo">recs<span>.</span></div>
+    <div class="tagline">Good things are worth sharing.</div>
+
+    <div class="nav-section">
+      <div class="nav-heading">Discover</div>
+      <%= link_to "Home", root_path, class: "nav-link" %>
+      <%= link_to "Categories", categories_path, class: "nav-link" %>
+      <%= link_to "Friends", friendships_path, class: "nav-link" %>
+    </div>
+  </aside>
+
+  <main class="main-content">
+
+    <div class="breadcrumb">
+      <%= link_to "Home", root_path %>
+      <span> / </span>
+      Add Recommendation
+    </div>
+
+    <div class="form-page-header">
+      <h1>Share a recommendation</h1>
+      <p>
+        Found something you love? Share it with your friends.
+      </p>
+    </div>
+
+    <div class="recommendation-form-card">
+
+      <% if @review.errors.any? %>
+        <div class="error-messages">
+          <% @review.errors.full_messages.each do |message| %>
+            <p><%= message %></p>
+          <% end %>
+        </div>
+      <% end %>
+
+      <%= form_with url: reviews_path,
+                    scope: :recommendation do |form| %>
+
+        <div class="form-group">
+          <%= form.label :category_id, "Category" %>
+
+          <%= form.collection_select :category_id,
+              @categories,
+              :id,
+              :name,
+              { selected: @selected_category&.id,
+                prompt: "Choose a category" },
+              { required: true } %>
+        </div>
+
+        <div class="form-divider"></div>
+
+        <h2>What are you recommending?</h2>
+
+        <div class="form-group">
+          <%= form.label :item_title, "Name" %>
+          <%= form.text_field :item_title,
+              placeholder: "e.g. The Alchemist, a restaurant, an album...",
+              required: true,
+              value: params.dig(:recommendation, :item_title) %>
+        </div>
+
+        <div class="form-group">
+          <%= form.label :item_creator, "Creator / Author / Artist (optional)" %>
+          <%= form.text_field :item_creator,
+              placeholder: "e.g. Paulo Coelho",
+              value: params.dig(:recommendation, :item_creator) %>
+        </div>
+
+        <div class="form-group">
+          <%= form.label :item_description, "Short description (optional)" %>
+          <%= form.text_area :item_description,
+              rows: 2,
+              placeholder: "A little more about this item...",
+              value: params.dig(:recommendation, :item_description) %>
+        </div>
+
+        <div class="form-divider"></div>
+
+        <h2>Your review</h2>
+
+        <div class="form-group">
+          <%= form.label :rating, "Your rating" %>
+          <%= form.select :rating,
+              options_for_select(
+                [
+                  ["★★★★★ - Loved it", 5],
+                  ["★★★★☆ - Really liked it", 4],
+                  ["★★★☆☆ - It was good", 3],
+                  ["★★☆☆☆ - Not for me", 2],
+                  ["★☆☆☆☆ - Disappointed", 1]
+                ],
+                params.dig(:recommendation, :rating) || 5
+              ),
+              {},
+              { required: true } %>
+        </div>
+
+        <div class="form-group">
+          <%= form.label :body, "Why do you recommend it?" %>
+          <%= form.text_area :body,
+              rows: 5,
+              placeholder: "Tell your friends what you liked about it...",
+              required: true,
+              value: params.dig(:recommendation, :body) %>
+        </div>
+
+        <div class="form-actions">
+          <%= form.submit "Publish Recommendation",
+              class: "button" %>
+
+          <%= link_to "Cancel", root_path, class: "cancel-link" %>
+        </div>
+
+      <% end %>
+    </div>
+
+  </main>
+</div>

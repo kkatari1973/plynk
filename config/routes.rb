@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   get "items/edit"
   get "reviews/index"
   get "reviews/show"
-  get "reviews/new"
+  get "reviews/new", as: :new_review
   get "reviews/edit"
   get "home/index"
   resource :session
@@ -35,5 +35,10 @@ Rails.application.routes.draw do
     resources :reviews, only: [:new, :create]
   end
 
-  resources :reviews, only: [:index, :show, :edit, :update, :destroy]
+  resources :reviews, only: [:index, :create, :show, :edit, :update, :destroy]
+
+  namespace :admin do
+    resources :categories
+  end
+  
 end

@@ -1,0 +1,9 @@
+<% if Current.user&.admin? %>
+  <div class="nav-section">
+    <div class="nav-heading">Administration</div>
+
+    <%= link_to "Manage Categories",
+        admin_categories_path,
+        class: "nav-link" %>
+  </div>
+<% end %>
