@@ -41,17 +41,17 @@
       <%= form.submit "Search", class: "button" %>
     <% end %>
 
-    <div class="category-filters">
-      <%= link_to "All",
-          root_path,
-          class: "category-chip #{'active' if params[:category].blank?}" %>
+<div class="category-filters">
+  <%= link_to "All",
+      root_path,
+      class: "category-chip #{'active' if @selected_category.nil?}" %>
 
-      <% @categories.each do |category| %>
-        <%= link_to category.name,
-            root_path(category: category.slug),
-            class: "category-chip #{'active' if params[:category] == category.slug}" %>
-      <% end %>
-    </div>
+  <% @categories.each do |category| %>
+    <%= link_to category.name,
+        root_path(category: category.slug),
+        class: "category-chip #{'active' if @selected_category&.id == category.id}" %>
+  <% end %>
+</div>
 
     <div class="review-feed">
       <% @reviews.each do |review| %>
@@ -61,7 +61,7 @@
             <%= review.item.category.name.downcase %>
           </div>
 
-          <h3><%= review.item.title %></h3>
+          <h3> <%= link_to review.item.title, item_path(review.item) %> </h3>
 
           <% if review.item.creator.present? %>
             <div class="review-meta">

@@ -32,7 +32,7 @@ Rails.application.routes.draw do
   resources :categories, only: [:index, :show]
 
   resources :items do
-    resources :reviews, only: [:new, :create]
+    resources :reviews, only: [:new, :create, :show]
   end
 
   resources :reviews, only: [:index, :create, :show, :edit, :update, :destroy]

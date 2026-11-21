@@ -531,3 +531,96 @@ select:focus {
 .error-messages p {
   margin: 4px 0;
 }
+
+/* Item detail page */
+
+.item-header {
+  background: white;
+  border: 1px solid #e9e9e6;
+  border-radius: 12px;
+  padding: 30px;
+  margin-bottom: 35px;
+}
+
+.item-category {
+  color: #a45b35;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 12px;
+}
+
+.item-header h1 {
+  font-size: 32px;
+  letter-spacing: -1px;
+  margin: 0 0 8px;
+}
+
+.item-creator {
+  color: #777;
+  font-size: 16px;
+  margin-bottom: 18px;
+}
+
+.item-description {
+  color: #555;
+  line-height: 1.7;
+  max-width: 700px;
+}
+
+.item-details {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 30px;
+  border-top: 1px solid #eee;
+  margin-top: 22px;
+  padding-top: 20px;
+}
+
+.item-detail {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  font-size: 14px;
+}
+
+.detail-label {
+  color: #999;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.item-header-actions {
+  margin-top: 25px;
+}
+
+.item-reviews {
+  margin-top: 30px;
+}
+
+.review-actions {
+  margin-top: 14px;
+  font-size: 13px;
+}
+
+.review-actions a {
+  color: #a45b35;
+}
+
+.review-card h3 a {
+  color: #222;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.review-card h3 a:hover {
+  color: #a45b35;
+  text-decoration: underline;
+}
+
+.category-chip.active {
+  background: #a45b35;
+  color: white;
+}
