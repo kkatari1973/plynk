@@ -1,45 +1,25 @@
-
-<div class="app-layout">
-
-  <aside class="sidebar">
-    <div class="logo">recs<span>.</span></div>
-    <div class="tagline">Good things are worth sharing.</div>
-
-    <div class="nav-section">
-      <div class="nav-heading">Discover</div>
-      <%= link_to "Home", root_path, class: "nav-link" %>
-      <%= link_to "Categories", categories_path, class: "nav-link" %>
-      <%= link_to "Friends", friendships_path, class: "nav-link" %>
+<div class="page-header">
+  <div>
+    <h1>Explore Categories</h1>
+    <div class="page-subtitle">
+      Browse recommendations by interest.
     </div>
-  </aside>
+  </div>
+</div>
 
-  <main class="main-content">
+<div class="category-grid">
+  <% @categories.each do |category| %>
+    <%= link_to category_path(category.slug),
+        class: "category-card" do %>
 
-    <div class="page-header">
-      <div>
-        <h1>Explore Categories</h1>
-        <div class="page-subtitle">
-          Browse recommendations by interest.
-        </div>
+      <h2><%= category.name %></h2>
+
+      <p><%= category.description %></p>
+
+      <div class="category-count">
+        <%= pluralize(category.items_count, "item") %>
       </div>
-    </div>
 
-    <div class="category-grid">
-      <% @categories.each do |category| %>
-        <%= link_to category_path(category.slug),
-            class: "category-card" do %>
-
-          <h2><%= category.name %></h2>
-
-          <p><%= category.description %></p>
-
-          <div class="category-count">
-            <%= pluralize(category.items_count, "item") %>
-          </div>
-
-        <% end %>
-      <% end %>
-    </div>
-
-  </main>
+    <% end %>
+  <% end %>
 </div>

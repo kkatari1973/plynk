@@ -3,6 +3,7 @@
   <p>Join your friends and share recommendations.</p>
 
   <%= form_with model: @user, url: registration_path do |form| %>
+    <%= hidden_field_tag :invitation, params[:invitation] %>
 
     <% if @user.errors.any? %>
       <div class="error-messages">

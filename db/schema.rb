@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_11_15_154811) do
+ActiveRecord::Schema[8.1].define(version: 2026_11_21_215459) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -22,6 +22,20 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_15_154811) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["slug"], name: "index_categories_on_slug", unique: true
+  end
+
+  create_table "friend_invitations", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "email", null: false
+    t.string "token_digest", null: false
+    t.datetime "expires_at", null: false
+    t.datetime "accepted_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["expires_at"], name: "index_friend_invitations_on_expires_at"
+    t.index ["token_digest"], name: "index_friend_invitations_on_token_digest", unique: true
+    t.index ["user_id", "email"], name: "index_friend_invitations_on_user_id_and_email", unique: true
+    t.index ["user_id"], name: "index_friend_invitations_on_user_id"
   end
 
   create_table "friendships", force: :cascade do |t|
@@ -79,6 +93,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_15_154811) do
     t.index ["email_address"], name: "index_users_on_email_address", unique: true
   end
 
+  add_foreign_key "friend_invitations", "users"
   add_foreign_key "friendships", "users"
   add_foreign_key "friendships", "users", column: "friend_id"
   add_foreign_key "items", "categories"

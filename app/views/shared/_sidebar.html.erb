@@ -1,9 +1,43 @@
-<% if Current.user&.admin? %>
-  <div class="nav-section">
-    <div class="nav-heading">Administration</div>
 
-    <%= link_to "Manage Categories",
-        admin_categories_path,
+<aside class="sidebar">
+  <div class="logo">recs<span>.</span></div>
+  <div class="tagline">Good things are worth sharing.</div>
+
+  <div class="nav-section">
+    <div class="nav-heading">Discover</div>
+
+    <%= link_to "Home",
+        root_path,
+        class: "nav-link" %>
+
+    <%= link_to "Categories",
+        categories_path,
+        class: "nav-link" %>
+
+    <%= link_to "Friends",
+        friendships_path,
+        class: "nav-link" %>
+
+    <%= link_to "Invite Friends",
+        invitations_path,
         class: "nav-link" %>
   </div>
-<% end %>
+
+  <div class="nav-section">
+    <div class="nav-heading">Your account</div>
+
+    <%= link_to "Profile",
+        "#",
+        class: "nav-link" %>
+  </div>
+
+  <% if Current.user&.admin? %>
+    <div class="nav-section">
+      <div class="nav-heading">Administration</div>
+
+      <%= link_to "Manage Categories",
+          admin_categories_path,
+          class: "nav-link" %>
+    </div>
+  <% end %>
+</aside>

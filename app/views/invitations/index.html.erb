@@ -1,0 +1,52 @@
+
+<div class="page-container">
+
+  <div class="page-header">
+    <h1>Invite Friends</h1>
+    <p>Share your recommendations with people you know.</p>
+  </div>
+
+  <div class="recommendation-form-card">
+    <%= form_with url: invitations_path, method: :post do |form| %>
+      <div class="form-group">
+        <%= form.label :email, "Friend's email address" %>
+
+        <%= form.email_field :email,
+            required: true,
+            placeholder: "friend@example.com",
+            class: "form-input" %>
+      </div>
+
+      <div class="form-actions">
+        <%= form.submit "Send Invitation", class: "button" %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="pending-invitations">
+    <h2>Invitation History</h2>
+
+    <% if @invitations.any? %>
+      <% @invitations.each do |invitation| %>
+        <div class="invitation-row">
+          <div>
+            <strong><%= invitation.email %></strong>
+            <p>
+              Sent <%= invitation.created_at.strftime("%b %d, %Y") %>
+            </p>
+          </div>
+
+          <% if invitation.accepted? %>
+            <span class="invitation-status accepted">Accepted</span>
+          <% elsif invitation.expired? %>
+            <span class="invitation-status expired">Expired</span>
+          <% else %>
+            <span class="invitation-status pending">Pending</span>
+          <% end %>
+        </div>
+      <% end %>
+    <% else %>
+      <p>You haven't invited anyone yet.</p>
+    <% end %>
+  </div>
+</div>

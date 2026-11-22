@@ -12,6 +12,11 @@ class User < ApplicationRecord
             foreign_key: :user_id,
             dependent: :destroy
 
+  # Friends can register from invitations sent by this user
+  has_many :sent_friend_invitations,
+         class_name: "FriendInvitation",
+         dependent: :destroy
+
   # Friend requests received by this user
   has_many :received_friendships,
          class_name: "Friendship",

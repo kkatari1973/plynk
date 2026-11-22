@@ -1,0 +1,26 @@
+
+<h2>You've been invited to join Recs!</h2>
+
+<p>Hi there,</p>
+
+<p>
+  <strong><%= @inviter.name %></strong>
+  has invited you to join Recs, a place to share recommendations
+  with friends.
+</p>
+
+<p>
+  Once you create your account, you and
+  <%= @inviter.name %> will automatically become friends.
+</p>
+
+<p>
+  <%= link_to "Accept invitation and join Recs",
+      new_registration_url(invitation: @token) %>
+</p>
+
+<p>
+  This invitation expires in seven days.
+</p>
+
+<p>We hope to see you on Recs!</p>

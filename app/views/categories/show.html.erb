@@ -1,103 +1,74 @@
+<div class="breadcrumb">
+    <%= link_to "Categories", categories_path %>
+    <span> / </span>
+    <%= @category.name %>
+  </div>
 
-<div class="app-layout">
-
-  <aside class="sidebar">
-    <div class="logo">recs<span>.</span></div>
-    <div class="tagline">Good things are worth sharing.</div>
-
-    <div class="nav-section">
-      <div class="nav-heading">Discover</div>
-      <%= link_to "Home", root_path, class: "nav-link" %>
-      <%= link_to "Categories", categories_path, class: "nav-link" %>
-      <%= link_to "Friends", friendships_path, class: "nav-link" %>
+  <div class="page-header category-page-header">
+    <div>
+      <h1><%= @category.name %></h1>
+      <div class="page-subtitle">
+        <%= @category.description %>
+      </div>
     </div>
 
-    <% if Current.user&.admin? %>
-      <div class="nav-section">
-        <div class="nav-heading">Administration</div>
-        <%= link_to "Manage Categories",
-            admin_categories_path,
-            class: "nav-link" %>
+    <%= link_to "+ Add Recommendation",
+        new_review_path(category: @category.slug),
+        class: "button" %>
+  </div>
+
+  <div class="category-feed-heading">
+    <h2>Recommendations from your friends</h2>
+    <span><%= pluralize(@reviews.size, "review") %></span>
+  </div>
+
+  <div class="review-feed">
+    <% @reviews.each do |review| %>
+      <article class="review-card">
+
+        <div class="review-meta">
+          <strong><%= review.user.name %></strong>
+          recommended
+          <%= @category.name.downcase.singularize %>
+        </div>
+
+        <h3>
+          <%= link_to review.item.title,
+              item_path(review.item) %>
+        </h3>
+
+        <% if review.item.creator.present? %>
+          <div class="review-meta">
+            <%= review.item.creator %>
+          </div>
+        <% end %>
+
+        <div class="review-rating">
+          <%= "★" * review.rating %><%= "☆" * (5 - review.rating) %>
+        </div>
+
+        <div class="review-body">
+          <%= review.body %>
+        </div>
+
+        <div class="review-date">
+          <%= review.created_at.strftime("%B %-d, %Y") %>
+        </div>
+
+      </article>
+    <% end %>
+
+    <% if @reviews.empty? %>
+      <div class="empty-state">
+        <h3>No recommendations yet</h3>
+        <p>
+          There aren't any recommendations in this category
+          from you or your friends yet.
+        </p>
+
+        <%= link_to "Add the first recommendation",
+            reviews_new_path,
+            class: "button" %>
       </div>
     <% end %>
-  </aside>
-
-  <main class="main-content">
-
-    <div class="breadcrumb">
-      <%= link_to "Categories", categories_path %>
-      <span> / </span>
-      <%= @category.name %>
-    </div>
-
-    <div class="page-header category-page-header">
-      <div>
-        <h1><%= @category.name %></h1>
-        <div class="page-subtitle">
-          <%= @category.description %>
-        </div>
-      </div>
-
-      <%= link_to "+ Add Recommendation",
-          new_review_path(category: @category.slug),
-          class: "button" %>
-    </div>
-
-    <div class="category-feed-heading">
-      <h2>Recommendations from your friends</h2>
-      <span><%= pluralize(@reviews.size, "review") %></span>
-    </div>
-
-    <div class="review-feed">
-      <% @reviews.each do |review| %>
-        <article class="review-card">
-
-          <div class="review-meta">
-            <strong><%= review.user.name %></strong>
-            recommended
-            <%= @category.name.downcase.singularize %>
-          </div>
-
-          <h3>
-            <%= link_to review.item.title,
-                item_path(review.item) %>
-          </h3>
-
-          <% if review.item.creator.present? %>
-            <div class="review-meta">
-              <%= review.item.creator %>
-            </div>
-          <% end %>
-
-          <div class="review-rating">
-            <%= "★" * review.rating %><%= "☆" * (5 - review.rating) %>
-          </div>
-
-          <div class="review-body">
-            <%= review.body %>
-          </div>
-
-          <div class="review-date">
-            <%= review.created_at.strftime("%B %-d, %Y") %>
-          </div>
-
-        </article>
-      <% end %>
-
-      <% if @reviews.empty? %>
-        <div class="empty-state">
-          <h3>No recommendations yet</h3>
-          <p>
-            There aren't any recommendations in this category
-            from you or your friends yet.
-          </p>
-
-          <%= link_to "Add the first recommendation",
-              reviews_new_path,
-              class: "button" %>
-        </div>
-      <% end %>
-    </div>
-
-  </main>
 </div>

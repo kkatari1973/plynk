@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get "invitations/index"
   get "friendships/index"
   get "categories/index"
   get "categories/show"
@@ -27,6 +28,7 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root "home#index"
 
+  resources :invitations, only: [:index, :create]
   resources :friendships, only: [:index, :create, :update, :destroy]
 
   resources :categories, only: [:index, :show]

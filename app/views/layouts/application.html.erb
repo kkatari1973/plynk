@@ -23,7 +23,31 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
+
+<body>
+  <% if Current.user %>
+    <div class="app-layout">
+      <%= render "shared/sidebar" %>
+
+      <main class="main-content">
+        <% if notice.present? %>
+          <div class="flash flash-notice">
+            <%= notice %>
+          </div>
+        <% end %>
+
+        <% if alert.present? %>
+          <div class="flash flash-alert">
+            <%= alert %>
+          </div>
+        <% end %>
+
+        <%= yield %>
+      </main>
+    </div>
+  <% else %>
     <%= yield %>
-  </body>
+  <% end %>
+</body>
+
 </html>

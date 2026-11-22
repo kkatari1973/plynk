@@ -1,0 +1,13 @@
+You've been invited to join Recs!
+
+<%= @inviter.name %> has invited you to join Recs, a place to share recommendations with friends.
+
+Once you create your account, you and <%= @inviter.name %> will automatically become friends.
+
+Accept your invitation here:
+
+<%= new_registration_url(invitation: @token) %>
+
+This invitation expires in seven days.
+
+We hope to see you on Recs!

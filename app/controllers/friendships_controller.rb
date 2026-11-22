@@ -15,8 +15,7 @@ class FriendshipsController < ApplicationController
 
   def create
     friend = User.find_by(
-      # id: params[:friend_id]
-      email_address: params[:friend_email].to_s.strip.downcase
+      email_address: params[:email_address].to_s.strip.downcase
       )
 
     unless friend
