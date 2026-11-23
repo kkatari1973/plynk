@@ -67,7 +67,7 @@
         </p>
 
         <%= link_to "Add the first recommendation",
-            reviews_new_path,
+            new_review_path(category: @category.slug),
             class: "button" %>
       </div>
     <% end %>

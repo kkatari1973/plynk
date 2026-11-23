@@ -15,20 +15,6 @@
   <% end %>
 
   <section class="friend-section">
-    <h2>Add a friend</h2>
-
-    <%= form_with url: friendships_path, method: :post do |form| %>
-      <div class="friend-form">
-        <%= form.email_field :email_address,
-              placeholder: "Enter your friend's email",
-              required: true %>
-
-        <%= form.submit "Send request" %>
-      </div>
-    <% end %>
-  </section>
-
-  <section class="friend-section">
     <h2>Friend requests received</h2>
 
     <% if @received_requests.any? %>

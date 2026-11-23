@@ -6,9 +6,15 @@
     </div>
   </div>
 
-  <%= link_to "＋ Add recommendation",
-      items_path,
-      class: "button" %>
+  <% if @selected_category %>
+    <%= link_to "＋ Add recommendation",
+        new_review_path(category: @selected_category.slug),
+        class: "button" %>
+  <% else %>
+    <span class="button button-disabled" aria-disabled="true">
+      ＋ Add recommendation
+    </span>
+  <% end %>
 </div>
 
 <%= form_with url: root_path, method: :get,
