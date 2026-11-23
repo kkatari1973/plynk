@@ -14,6 +14,9 @@
     <div class="alert"><%= flash[:alert] %></div>
   <% end %>
 
+  <div class="friends-layout">
+    <div class="friends-list-column">
+
   <section class="friend-section">
     <h2>Friend requests received</h2>
 
@@ -98,5 +101,54 @@
       </p>
     <% end %>
   </section>
+
+    </div>
+
+    <aside class="friends-invite-column">
+      <section class="friend-section invite-section">
+        <h2>Invite friends</h2>
+        <p>Share your recommendations with people you know.</p>
+
+        <div class="recommendation-form-card">
+          <%= form_with url: invitations_path, method: :post do |form| %>
+            <div class="form-group">
+              <%= form.label :email, "Friend's email address" %>
+              <%= form.email_field :email,
+                  required: true,
+                  placeholder: "friend@example.com",
+                  class: "form-input" %>
+            </div>
+
+            <div class="form-actions">
+              <%= form.submit "Send Invitation", class: "button" %>
+            </div>
+          <% end %>
+        </div>
+      </section>
+
+      <section class="friend-section invitation-history-section">
+        <h2>Invitation History</h2>
+        <% if @invitations.any? %>
+          <% @invitations.each do |invitation| %>
+            <div class="invitation-row">
+              <div>
+                <strong><%= invitation.email %></strong>
+                <p>Sent <%= invitation.created_at.strftime("%b %d, %Y") %></p>
+              </div>
+              <% if invitation.accepted? %>
+                <span class="invitation-status accepted">Accepted</span>
+              <% elsif invitation.expired? %>
+                <span class="invitation-status expired">Expired</span>
+              <% else %>
+                <span class="invitation-status pending">Pending</span>
+              <% end %>
+            </div>
+          <% end %>
+        <% else %>
+          <p class="empty-message">You haven't invited anyone yet.</p>
+        <% end %>
+      </section>
+    </aside>
+  </div>
 
 </div>

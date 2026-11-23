@@ -3,6 +3,7 @@ class FriendshipsController < ApplicationController
   
   def index
     @friends = Current.user.accepted_friends.order(:name)
+    @invitations = Current.user.sent_friend_invitations.order(created_at: :desc)
 
     @sent_requests = Current.user.sent_friendships
                             .pending

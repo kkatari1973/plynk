@@ -6,25 +6,26 @@ class InvitationsController < ApplicationController
     @invitations = Current.user
                           .sent_friend_invitations
                           .order(created_at: :desc)
+    redirect_to friendships_path
   end
 
   def create
     email = params[:email].to_s.strip.downcase
 
     if email.blank? || !email.match?(URI::MailTo::EMAIL_REGEXP)
-      redirect_to invitations_path,
+      redirect_to friendships_path,
                   alert: "Please enter a valid email address."
       return
     end
 
     if email == Current.user.email_address.to_s.downcase
-      redirect_to invitations_path,
+      redirect_to friendships_path,
                   alert: "You cannot invite yourself."
       return
     end
 
     if User.exists?(email_address: email)
-      redirect_to invitations_path,
+      redirect_to friendships_path,
                   alert: "This person already has a Recs account."
       return
     end
@@ -47,10 +48,10 @@ class InvitationsController < ApplicationController
         token: token
       ).invite.deliver_now
 
-      redirect_to invitations_path,
+      redirect_to friendships_path,
                   notice: "Invitation sent to #{email}."
     else
-      redirect_to invitations_path,
+      redirect_to friendships_path,
                   alert: invitation.errors.full_messages.to_sentence
     end
   end
