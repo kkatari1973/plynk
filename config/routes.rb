@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   get "home/index"
   resource :session
   resources :passwords, param: :token
-  resource :registration, only: [:new, :create]
+  resource :registration, only: [ :new, :create ]
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
@@ -28,19 +28,18 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root "home#index"
 
-  resources :invitations, only: [:index, :create]
-  resources :friendships, only: [:index, :create, :update, :destroy]
+  resources :invitations, only: [ :index, :create ]
+  resources :friendships, only: [ :index, :create, :update, :destroy ]
 
-  resources :categories, only: [:index, :show]
+  resources :categories, only: [ :index, :show ]
 
   resources :items do
-    resources :reviews, only: [:new, :create, :show]
+    resources :reviews, only: [ :new, :create, :show ]
   end
 
-  resources :reviews, only: [:index, :create, :show, :edit, :update, :destroy]
+  resources :reviews, only: [ :index, :create, :show, :edit, :update, :destroy ]
 
   namespace :admin do
     resources :categories
   end
-  
 end

@@ -1,9 +1,9 @@
 class CreateItems < ActiveRecord::Migration[8.1]
   def change
     create_table :items do |t|
-      t.references :category, 
-                    null: false, 
-                    foreign_key: true, 
+      t.references :category,
+                    null: false,
+                    foreign_key: true,
                     index: true
 
       t.string :title, null: false
@@ -15,6 +15,6 @@ class CreateItems < ActiveRecord::Migration[8.1]
     end
 
     add_index :items, :title
-    add_index :items, [:category_id, :title]
+    add_index :items, [ :category_id, :title ]
   end
 end

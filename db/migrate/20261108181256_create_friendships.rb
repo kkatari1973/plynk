@@ -2,8 +2,8 @@ class CreateFriendships < ActiveRecord::Migration[8.1]
   def change
     create_table :friendships do |t|
       t.references :user, null: false, foreign_key: true
-      t.references :friend, 
-                    null: false, 
+      t.references :friend,
+                    null: false,
                     foreign_key: { to_table: :users }
 
       t.string :status, null: false, default: "pending"
@@ -11,11 +11,11 @@ class CreateFriendships < ActiveRecord::Migration[8.1]
       t.timestamps
     end
 
-    add_index :friendships, [:user_id, :friend_id], unique: true
+    add_index :friendships, [ :user_id, :friend_id ], unique: true
 
-    add_check_constraint :friendships, 
+    add_check_constraint :friendships,
                           "user_id <> friend_id",
                           name: "friendships_no_self_friendship"
-                          # "status IN ('pending', 'accepted', 'blocked')", name: "friendship_status_check"
+    # "status IN ('pending', 'accepted', 'blocked')", name: "friendship_status_check"
   end
 end

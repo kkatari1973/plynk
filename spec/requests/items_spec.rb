@@ -2,7 +2,6 @@
 require "rails_helper"
 
 RSpec.describe "Item detail pages", type: :request do
-
   let!(:alice) { create(:user, name: "Alice") }
   let!(:bob)   { create(:user, name: "Bob") }
   let!(:charlie) { create(:user, name: "Charlie") }
@@ -60,7 +59,6 @@ RSpec.describe "Item detail pages", type: :request do
   end
 
   describe "GET /items/:id" do
-
     context "when Alice is signed in" do
       before do
         sign_in(alice)
@@ -162,6 +160,5 @@ RSpec.describe "Item detail pages", type: :request do
         )
       end
     end
-
   end
 end

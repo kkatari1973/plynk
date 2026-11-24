@@ -1,16 +1,16 @@
 class Friendship < ApplicationRecord
   belongs_to :user
-  belongs_to :friend, class_name: 'User'
+  belongs_to :friend, class_name: "User"
 
-  
-  enum :status, { 
-    pending: "pending", 
-    accepted: "accepted", 
-    declined: "declined" 
+
+  enum :status, {
+    pending: "pending",
+    accepted: "accepted",
+    declined: "declined"
   }
 
-  validates :friend_id, uniqueness: { 
-    scope: :user_id, 
+  validates :friend_id, uniqueness: {
+    scope: :user_id,
     message: "Friend request already sent" }
 
   validate :cannot_friend_yourself
@@ -20,7 +20,7 @@ class Friendship < ApplicationRecord
 
   def cannot_friend_yourself
     if user_id == friend_id
-      errors.add(:friend_id, "You cannot send a friend 
+      errors.add(:friend_id, "You cannot send a friend
                                 request to yourself")
     end
   end

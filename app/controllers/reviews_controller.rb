@@ -1,7 +1,7 @@
 
 class ReviewsController < ApplicationController
-  before_action :set_review, only: [:show, :edit, :update, :destroy]
-  before_action :require_review_owner, only: [:edit, :update, :destroy]
+  before_action :set_review, only: [ :show, :edit, :update, :destroy ]
+  before_action :require_review_owner, only: [ :edit, :update, :destroy ]
 
   def index
     @reviews = Review.visible_to(Current.user)

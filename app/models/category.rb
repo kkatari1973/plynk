@@ -4,8 +4,7 @@ class Category < ApplicationRecord
     validates :name, presence: true
     validates :slug, presence: true, uniqueness: true
 
-    scope :active, -> { 
+    scope :active, -> {
         where(active: true).order(:name)
     }
-
 end

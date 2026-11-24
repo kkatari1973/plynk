@@ -8,7 +8,7 @@ class User < ApplicationRecord
 
   # Friend requests sent by this user
   has_many :sent_friendships,
-            class_name: 'Friendship',
+            class_name: "Friendship",
             foreign_key: :user_id,
             dependent: :destroy
 
@@ -28,8 +28,7 @@ class User < ApplicationRecord
     sent_ids = sent_friendships.accepted.select(:friend_id)
     received_ids = received_friendships.accepted.select(
                     :user_id)
-  
+
     User.where(id: sent_ids).or(User.where(id: received_ids))
   end
-
 end

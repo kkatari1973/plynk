@@ -9,7 +9,7 @@ Rails.application.configure do
   }
 
   config.action_mailer.delivery_method = :letter_opener
-  
+
   # Make code changes take effect immediately without server restart.
   config.enable_reloading = true
 

@@ -112,7 +112,7 @@ User.find_each do |user|
     review = Review.find_or_initialize_by(user: user, item: item)
 
     review.update!(
-      rating: [5, 4, 5, 5, 4][index],
+      rating: [ 5, 4, 5, 5, 4 ][index],
       body: [
         "A great place to visit. Definitely worth trying!",
         "An excellent book. I really enjoyed reading it.",

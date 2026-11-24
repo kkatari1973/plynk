@@ -13,7 +13,7 @@ class CreateFriendInvitations < ActiveRecord::Migration[8.0]
     add_index :friend_invitations, :token_digest, unique: true
 
     add_index :friend_invitations,
-              [:user_id, :email],
+              [ :user_id, :email ],
               unique: true
 
     add_index :friend_invitations, :expires_at

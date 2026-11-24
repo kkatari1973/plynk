@@ -1,6 +1,6 @@
 class FriendshipsController < ApplicationController
-  before_action :set_friendship, only: [:update, :destroy]
-  
+  before_action :set_friendship, only: [ :update, :destroy ]
+
   def index
     @friends = Current.user.accepted_friends.order(:name)
     @invitations = Current.user.sent_friend_invitations.order(created_at: :desc)
@@ -20,8 +20,8 @@ class FriendshipsController < ApplicationController
       )
 
     unless friend
-      redirect_to friendships_path, 
-          alert: 'No user found with that email address'
+      redirect_to friendships_path,
+          alert: "No user found with that email address"
       return
     end
 
@@ -29,9 +29,9 @@ class FriendshipsController < ApplicationController
                 .sent_friendships.new(friend: friend)
 
     if friendship.save
-      redirect_to friendships_path, notice: 'Friend request sent'
+      redirect_to friendships_path, notice: "Friend request sent"
     else
-      redirect_to friendships_path, 
+      redirect_to friendships_path,
       alert: friendship.errors.full_messages.to_sentence
     end
   end
@@ -51,22 +51,21 @@ class FriendshipsController < ApplicationController
 
     case params[:status]
     when "accepted"
-      @friendship.update!(status: 'accepted')
-      redirect_to friendships_path, 
-            notice: 'Friend request accepted'
+      @friendship.update!(status: "accepted")
+      redirect_to friendships_path,
+            notice: "Friend request accepted"
     when "declined"
-      @friendship.update!(status: 'declined')
-      redirect_to friendships_path, 
-            notice: 'Friend request declined'
+      @friendship.update!(status: "declined")
+      redirect_to friendships_path,
+            notice: "Friend request declined"
     else
-      redirect_to friendships_path, 
-            alert: 'Invalid request'
+      redirect_to friendships_path,
+            alert: "Invalid request"
     end
-    
   end
 
   def destroy
-    unless [@friendship.user_id, @friendship.friend_id]
+    unless [ @friendship.user_id, @friendship.friend_id ]
             .include?(Current.user.id)
       head :forbidden
       return
