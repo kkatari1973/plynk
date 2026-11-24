@@ -7,6 +7,7 @@ RSpec.describe User, type: :model do
     let!(:bob) { create(:user, name: "Bob") }
     let!(:charlie) { create(:user, name: "Charlie") }
     let!(:david) { create(:user, name: "David") }
+    let!(:frank) { create(:user, name: "Frank") }
 
     before do
       # Accepted friendship
@@ -23,6 +24,13 @@ RSpec.describe User, type: :model do
         user: alice,
         friend: charlie,
         status: "pending"
+      )
+
+      create(
+        :friendship,
+        user: alice,
+        friend: frank,
+        status: "declined"
       )
     end
 
@@ -45,6 +53,10 @@ RSpec.describe User, type: :model do
     it "does not include duplicate friends" do
       expect(alice.accepted_friends.to_a.uniq)
         .to eq(alice.accepted_friends.to_a)
+    end
+
+    it "excludes declined friendships" do
+        expect(alice.accepted_friends).not_to include(frank)
     end
   end
 end

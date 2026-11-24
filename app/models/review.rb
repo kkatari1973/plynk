@@ -11,9 +11,9 @@ class Review < ApplicationRecord
     order(created_at: :desc)
   }
 
-  scope :visible_to, ->(viewer) {
-    where(user_id: viewer.accepted_friends.select(:id))
-      .or(where(user_id: viewer.id))
+  scope :visible_to, ->(user) {
+    where(user_id: user.id)
+      .or(where(user_id: user.accepted_friends.select(:id)))
   }
 
   def readable_by?(viewer)
