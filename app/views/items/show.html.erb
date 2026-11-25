@@ -15,6 +15,31 @@
 
       <h1><%= @item.title %></h1>
 
+      <% if @rating_summary[:count] > 0 %>
+        <div class="item-rating">
+          <span class="stars">
+            <% 5.times do |i| %>
+              <%= i < @rating_summary[:average].round ? "★" : "☆" %>
+            <% end %>
+          </span>
+
+          <strong>
+            <%= number_with_precision(
+                  @rating_summary[:average],
+                 precision: 1
+                ) %>
+          </strong>
+
+          <span class="rating-count">
+            (<%= pluralize(@rating_summary[:count], "review") %>)
+          </span>
+        </div>
+      <% else %>
+        <div class="item-rating">
+          No ratings yet
+        </div>
+      <% end %>
+
       <% if @item.creator.present? %>
         <div class="item-creator">
           <%= @item.creator %>

@@ -1,0 +1,9 @@
+<% if summary[:count].positive? %>
+  <div class="item-rating" aria-label="Average rating from people you can see">
+    <span class="stars">
+      <% 5.times do |i| %><%= i < summary[:average].round ? "★" : "☆" %><% end %>
+    </span>
+    <span><%= format("%.1f", summary[:average]) %></span>
+    <span class="rating-count">(<%= pluralize(summary[:count], "review") %>)</span>
+  </div>
+<% end %>

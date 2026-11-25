@@ -15,6 +15,9 @@ class HomeController < ApplicationController
     end
 
     # Limit results after filtering
-    @reviews = @reviews.limit(50)
+    @reviews = @reviews.limit(50).to_a
+    @rating_summaries = @reviews.map(&:item).uniq(&:id).index_with do |item|
+      item.rating_summary_for(Current.user)
+    end
   end
 end

@@ -816,3 +816,21 @@ select:focus {
     flex-direction: column;
   }
 }
+
+.item-rating {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 15px 0;
+}
+
+.item-rating .stars {
+  color: #e5a23b;
+  font-size: 20px;
+  letter-spacing: 2px;
+}
+
+.rating-count {
+  color: #999;
+  font-size: 13px;
+}

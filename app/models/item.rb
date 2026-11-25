@@ -20,4 +20,13 @@ class Item < ApplicationRecord
   def display_title
     title
   end
+
+  def rating_summary_for(user)
+    visible_reviews = Review.visible_to(user).where(item_id: id)
+
+    {
+      average: visible_reviews.average(:rating)&.to_f,
+      count: visible_reviews.count
+    }
+  end
 end

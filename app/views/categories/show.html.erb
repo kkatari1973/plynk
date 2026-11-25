@@ -37,6 +37,9 @@
               item_path(review.item) %>
         </h3>
 
+        <%= render "shared/item_rating_summary",
+            summary: @rating_summaries.fetch(review.item) %>
+
         <% if review.item.creator.present? %>
           <div class="review-meta">
             <%= review.item.creator %>
