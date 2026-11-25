@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get "profiles/show"
+  get "profiles/edit"
   get "invitations/index"
   get "friendships/index"
   get "categories/index"
@@ -38,6 +40,8 @@ Rails.application.routes.draw do
   end
 
   resources :reviews, only: [ :index, :create, :show, :edit, :update, :destroy ]
+
+  resource :profile, only: [:show, :edit, :update]
 
   namespace :admin do
     resources :categories

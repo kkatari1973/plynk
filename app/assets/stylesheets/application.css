@@ -834,3 +834,52 @@ select:focus {
   color: #999;
   font-size: 13px;
 }
+
+.profile-card {
+  background: white;
+  border: 1px solid #e8e8e8;
+  border-radius: 12px;
+  padding: 28px;
+  max-width: 650px;
+}
+
+.profile-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.profile-header h2 {
+  margin: 0 0 6px;
+}
+
+.profile-header p {
+  color: #777;
+  margin: 0;
+}
+
+.profile-stats {
+  display: flex;
+  gap: 50px;
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+  padding: 22px 0;
+  margin: 24px 0;
+}
+
+.profile-stats div {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.profile-stats strong {
+  font-size: 25px;
+}
+
+.profile-stats span,
+.profile-joined {
+  color: #777;
+  font-size: 14px;
+}

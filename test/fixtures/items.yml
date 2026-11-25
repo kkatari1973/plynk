@@ -5,11 +5,11 @@ one:
   title: MyString
   creator: MyString
   description: MyText
-  details: 
+  details: {}
 
 two:
   category: two
   title: MyString
   creator: MyString
   description: MyText
-  details: 
+  details: {}

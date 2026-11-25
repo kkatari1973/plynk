@@ -22,10 +22,7 @@
 
   <div class="nav-section">
     <div class="nav-heading">Your account</div>
-
-    <%= link_to "Profile",
-        "#",
-        class: "nav-link" %>
+    <%= link_to "Profile", profile_path, class: "nav-link" %>
   </div>
 
   <% if Current.user&.admin? %>

@@ -2,14 +2,14 @@
 
 one:
   user: one
-  email: MyString
-  token_digest: MyString
+  email: invite-one@example.com
+  token_digest: token-digest-one
   expires_at: 2026-11-21 16:54:59
   accepted_at: 2026-11-21 16:54:59
 
 two:
   user: two
-  email: MyString
-  token_digest: MyString
+  email: invite-two@example.com
+  token_digest: token-digest-two
   expires_at: 2026-11-21 16:54:59
   accepted_at: 2026-11-21 16:54:59

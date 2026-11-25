@@ -1,8 +1,10 @@
 require "test_helper"
 
 class InvitationsControllerTest < ActionDispatch::IntegrationTest
-  test "should get index" do
+  setup { sign_in_as(users(:one)) }
+
+  test "redirects to the friendships page" do
     get invitations_index_url
-    assert_response :success
+    assert_redirected_to friendships_path
   end
 end

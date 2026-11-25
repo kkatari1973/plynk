@@ -2,10 +2,10 @@
 
 one:
   user: one
-  friend: one
-  status: MyString
+  friend: two
+  status: accepted
 
 two:
   user: two
-  friend: two
-  status: MyString
+  friend: one
+  status: accepted

@@ -1,13 +1,13 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  name: MyString
-  slug: MyString
-  description: MyText
-  active: false
+  name: Books
+  slug: books-fixture
+  description: Books for fixture data
+  active: true
 
 two:
-  name: MyString
-  slug: MyString
-  description: MyText
-  active: false
+  name: Films
+  slug: films-fixture
+  description: Films for fixture data
+  active: true

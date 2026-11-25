@@ -1,0 +1,35 @@
+
+<div class="page-container">
+  <div class="page-header">
+    <h1>Your Profile</h1>
+    <p>Manage your Recs account.</p>
+  </div>
+
+  <div class="profile-card">
+    <div class="profile-header">
+      <div>
+        <h2><%= @user.name %></h2>
+        <p><%= @user.email_address %></p>
+      </div>
+
+      <%= link_to "Edit Profile", edit_profile_path,
+          class: "button" %>
+    </div>
+
+    <div class="profile-stats">
+      <div>
+        <strong><%= @friends_count %></strong>
+        <span>Friends</span>
+      </div>
+
+      <div>
+        <strong><%= @reviews_count %></strong>
+        <span>Reviews written</span>
+      </div>
+    </div>
+
+    <p class="profile-joined">
+      Member since <%= profile_member_since(@user) %>
+    </p>
+  </div>
+</div>
