@@ -89,6 +89,7 @@ production:
     <<: *default
     database: plynk_production
     username: plynk
+    host: 127.0.0.1
     password: <%= ENV["PLYNK_DATABASE_PASSWORD"] %>
   cache:
     <<: *primary_production

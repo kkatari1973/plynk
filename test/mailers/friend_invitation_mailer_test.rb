@@ -9,7 +9,7 @@ class FriendInvitationMailerTest < ActionMailer::TestCase
 
     assert_equal "One User invited you to join Recs", mail.subject
     assert_equal [ "invite-one@example.com" ], mail.to
-    assert_equal [ "from@example.com" ], mail.from
+    assert_equal [ "invites@mail.plynk.com" ], mail.from
     assert_match "One User has invited you to join Recs", mail.body.encoded
     assert_match "test-token", mail.body.encoded
   end
