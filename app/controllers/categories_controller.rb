@@ -1,8 +1,14 @@
 class CategoriesController < ApplicationController
   def index
+    visible_user_ids = [ Current.user.id ] + Current.user.accepted_friends.ids
+
     @categories = Category.active
-                          .left_joins(:items)
-                          .select("categories.*, COUNT(items.id) AS items_count")
+                          .left_joins(items: :reviews)
+                          .select(
+                            "categories.*, COUNT(DISTINCT CASE " \
+                            "WHEN reviews.user_id IN (#{visible_user_ids.join(',')}) " \
+                            "THEN reviews.id END) AS items_count"
+                          )
                           .group("categories.id")
   end
 
